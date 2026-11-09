@@ -29,27 +29,43 @@
       <h1 class="page-title">Conversor de moedas</h1>
       <p class="page-sub">Compare as conversões utilizando REST e SOAP.</p>
  
-      <section class="card-x">
+      <form class="card-x" id="conversionForm">
         <h2>Realizar conversão</h2>
-        <label for="valor" class="form-label">Valor</label>
-        <input id="valor" type="text" inputmode="decimal" class="form-control amount mb-3" value="1.000,00">
+        <label for="amount" class="form-label">Valor</label>
+        <input id="amount" type="number" min="0.01" step="any" class="form-control amount mb-3" value="100" placeholder="Digite o valor" required>
  
         <div class="row g-3 align-items-end mb-4">
           <div class="col">
-            <label for="de" class="form-label">De</label>
-            <select id="de" class="form-select"></select>
+            <label for="from" class="form-label">De</label>
+            <select id="from" class="form-select" required>
+              <option value="BRL" selected>BRL</option>
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+              <option value="JPY">JPY</option> <!-- Iene japonês -->
+              <option value="CNY">CNY</option> <!-- Yuan chinês -->
+              <option value="CHF">CHF</option> <!-- Franco Suiço -->
+              <option value="CAD">CAD</option> <!-- Dólar Canadense -->
+            </select>
           </div>
           <div class="col-auto">
             <button type="button" class="swap" id="trocar" aria-label="Inverter moedas"><i class="bi bi-arrow-left-right"></i></button>
           </div>
           <div class="col">
-            <label for="para" class="form-label">Para</label>
-            <select id="para" class="form-select"></select>
+            <label for="to" class="form-label">Para</label>
+            <select id="to" class="form-select" required>
+              <option value="BRL">BRL</option>
+              <option value="USD" selected>USD</option>
+              <option value="EUR">EUR</option>
+              <option value="JPY">JPY</option> <!-- Iene japonês -->
+              <option value="CNY">CNY</option> <!-- Yuan chinês -->
+              <option value="CHF">CHF</option> <!-- Franco Suiço -->
+              <option value="CAD">CAD</option> <!-- Dólar Canadense -->
+            </select>
           </div>
         </div>
  
-        <button type="button" id="converter" class=" btn-convert w-100">Converter</button>
-      </section>
+        <button type="submit" id="converter" class=" btn-convert w-100">Converter</button>
+      </form>
  
       <h2 class="section-title">Comparação dos resultados</h2>
       <div class="row g-3">
@@ -78,11 +94,11 @@
               </div>
               <span class="fast" id="mais-rapido"></span>
             </div>
-            <small class="text-secondary d-block mt-2">Valores e tempos ilustrativos.</small>
           </div>
         </div>
       </div>
     </main>
   </div>
+  <script src="js/converter.js" defer></script>
 </body>
 </html>
