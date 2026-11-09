@@ -70,9 +70,15 @@ body {
 }
 
 .menu a {
-    display: flex; align-items: center; gap: .75rem;
-    color: #94a3b8; text-decoration: none; font-weight: 500;
-    padding: .7rem .85rem; border-radius: 12px; margin-bottom: .25rem;
+    display: flex; 
+    align-items: center; 
+    gap: .75rem;
+    color: #94a3b8; 
+    text-decoration: none; 
+    font-weight: 500;
+    padding: .7rem .85rem; 
+    border-radius: 12px; 
+    margin-bottom: .25rem;
     transition: background .2s, color .2s;
 }
 
@@ -211,18 +217,72 @@ body {
 .swap:hover { background: #eef2ff; transform: rotate(180deg); }
 
 /* Resultados */
-.badge-api { font-weight: 600; padding: .4rem .8rem; border-radius: 999px; font-size: .8rem; }
-.badge-rest { background: var(--rest-soft); color: var(--rest); }
-.badge-soap { background: var(--soap-soft); color: var(--soap); }
-.result-card { height: 100%; position: relative; overflow: hidden; }
-.result-card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; }
+.badge-api { 
+    font-weight: 600; 
+    padding: .4rem .8rem; 
+    border-radius: 999px; 
+    font-size: .8rem;
+}
+
+.badge-rest { 
+    background: var(--rest-soft) !important; 
+    color: var(--rest) !important; 
+}
+
+.badge-soap { 
+    background: var(--soap-soft) !important; 
+    color: var(--soap) !important; 
+}
+
+.result-card {
+    height: 100%; 
+    position: relative; 
+    overflow: hidden; 
+}
+
+.result-card::before { 
+    content: ""; 
+    position: absolute; 
+    inset: 0 0 auto 0; 
+    height: 4px; 
+}
+
 .result-card.rest::before { background: var(--rest); }
+
 .result-card.soap::before { background: var(--soap); }
-.result-value { font-size: 2rem; font-weight: 700; letter-spacing: -.02em; margin: .9rem 0 1rem; }
-.meta { display: flex; justify-content: space-between; color: var(--muted); font-size: .9rem; padding: .5rem 0; border-top: 1px solid var(--line); }
-.meta strong { color: var(--ink); font-weight: 600; }
-.diff-value { font-size: 1.8rem; font-weight: 700; color: var(--primary); }
-.fast { color: #059669; font-size: .8rem; font-weight: 600; }
+
+.result-value { 
+    font-size: 2rem; 
+    font-weight: 700; 
+    letter-spacing: -.02em; 
+    margin: .9rem 0 1rem; 
+}
+
+.meta { 
+    display: flex; 
+    justify-content: space-between; 
+    color: var(--muted); 
+    font-size: .9rem; 
+    padding: .5rem 0; 
+    border-top: 1px solid var(--line); 
+}
+
+.meta strong { 
+    color: var(--ink); 
+    font-weight: 600; 
+}
+
+.diff-value { 
+    font-size: 1.8rem; 
+    font-weight: 700; 
+    color: var(--primary); 
+}
+
+.fast { 
+    color: #059669; 
+    font-size: .8rem; 
+    font-weight: 600; 
+}
  
 @media (max-width: 767.98px) {
     .app { flex-direction: column; }
