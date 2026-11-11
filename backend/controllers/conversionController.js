@@ -3,6 +3,8 @@ const {
 } = require('../services/restExchangeService');
 
 async function convertCurrency(req, res) {
+    const startTimeREST = performance.now();
+
     try {
         const { from, to, amount } = req.body;
 
@@ -41,6 +43,8 @@ async function convertCurrency(req, res) {
         // Calcula a conversão
         const convertedAmount = value * quotation.rate;
 
+        const responseTimeREST = performance.now() - startTimeREST;
+
         return res.status(200).json({
             provider: 'Frankfurter',
             from: origin,
@@ -48,7 +52,8 @@ async function convertCurrency(req, res) {
             amount: value,
             rate: quotation.rate,
             convertedAmount: Number(convertedAmount.toFixed(2)),
-            date: quotation.date
+            date: quotation.date,
+            time: Number(responseTimeREST.toFixed(2))
         });
 
     } catch (error) {
