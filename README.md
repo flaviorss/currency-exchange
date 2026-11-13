@@ -19,15 +19,10 @@ Objetivos principais:
 - Implementar o consumo de uma API REST pública.
 - Implementar o consumo de um Web Service SOAP público baseado em WSDL.
 - Comparar os resultados de conversões realizadas pelos dois serviços.
-- Apresentar cotações e históricos de maneira independente para cada serviço.
 - Analisar diferenças de desempenho, disponibilidade e comportamento entre as integrações.
 
 ## Escopo Funcional
-O sistema terá três módulos principais.
-
-Tela 01 — Conversor
-
-Objetivo: realizar a mesma conversão utilizando REST e SOAP, apresentando os resultados lado a lado.
+O sistema terá um único módulo principal (Conversor), que tem como objetivo, realizar a mesma conversão utilizando REST e SOAP e apresentar os resultados lado a lado.
 
 Funcionalidades:
 - Seleção da moeda de origem.
@@ -38,32 +33,85 @@ Funcionalidades:
 - Conversão utilizando SOAP.
 - Comparação dos resultados.
 - Exibição do tempo de resposta de cada serviço.
-- Exibição da diferença entre os valores retornados.
+- Exibição do serviço mais rápido.
 
-Tela 02 — Dashboard REST
+## APIs utilizadas
 
-Objetivo: apresentar uma visão geral das cotações e do comportamento histórico disponibilizado pelo serviço REST.
+#### REST — Frankfurter
+- Documentação oficial: https://frankfurter.dev
+- Endpoint usado: `https://api.frankfurter.dev/v2/rate/{origem}/{destino}`
+- Exemplo: `https://api.frankfurter.dev/v2/rate/usd/eur`
 
-Funcionalidades:
-- Seleção da moeda base.
-- Seleção da moeda de comparação.
-- Exibição da cotação atual.
-- Gráfico de variação histórica.
-- Filtros de período.
-- Cotação máxima e mínima.
-- Média da cotação no período.
-- Variação percentual.
+#### SOAP — Jazeera Airways
+- Documentação/operação: https://webapp.jazeeraairways.com/J9Services/Service.asmx?op=GetExchangeRateData
+- WSDL: https://webapp.jazeeraairways.com/J9Services/Service.asmx?WSDL
+- Operação chamada: `ExchangeInfo`
 
-Tela 03 — Dashboard SOAP
+## Exemplos de mensagens
 
-Objetivo: apresentar as informações equivalentes, utilizando exclusivamente os dados obtidos pelo Web Service SOAP.
+#### JSON recebido da API REST
+```json
+{
+  "date": "2026-11-12",
+  "base": "USD",
+  "quote": "EUR",
+  "rate": 0.89987
+}
+```
+#### XML enviado ao serviço SOAP
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <GetExchangeRateData xmlns="http://jazeeraairways.com/webservices/">
+      <FromCurrencyCode>USD</FromCurrencyCode>
+      <ToCurrencyCode>EUR</ToCurrencyCode>
+    </GetExchangeRateData>
+  </soap:Body>
+</soap:Envelope>
+```
 
-Funcionalidades:
-- Seleção das moedas.
-- Exibição da cotação atual.
-- Gráfico de variação histórica.
-- Filtros de período.
-- Cotação máxima e mínima.
-- Média da cotação no período.
-- Variação percentual.
-- Identificação da origem dos dados como SOAP.
+#### XML recebido do serviço SOAP
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">
+    <soap:Body>
+        <GetExchangeRateDataResponse xmlns=\"http://jazeeraairways.com/webservices\">
+            <GetExchangeRateDataResult>
+                <FromCurrencyCode>USD</FromCurrencyCode>
+                <ToCurrencyCode>EUR</ToCurrencyCode>
+                <Rate>0.9053356</Rate>
+            </GetExchangeRateDataResult>
+        </GetExchangeRateDataResponse>
+    </soap:Body>
+</soap:Envelope>
+```
+
+## Como executar o projeto
+
+### Pré-requisitos
+- Node.js e npm instalados.
+
+### Backend
+1. Abra um terminal na pasta `backend`:
+   ```bash
+   cd backend
+   ```
+2. Crie o arquivo `.env` com base no exemplo:
+   ```bash
+   cp .env.example .env
+   ```
+3. Instale as dependências:
+   ```bash
+   npm install
+   ```
+4. Inicie o servidor:
+   ```bash
+   npm start
+   ```
+   O backend ficará disponível em `http://localhost:3000`.
+
+### Frontend
+Com o backend em execução, abra o arquivo `frontend/index.html` no navegador. Use o conversor para selecionar as moedas, informar o valor e comparar os resultados REST e SOAP.
+
+
