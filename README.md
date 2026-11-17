@@ -13,7 +13,7 @@
 ## Definição do Projeto
 #### Plataforma de conversão e análise de moedas utilizando Web Services REST e SOAP.
 
-O sistema tem como objetivo permitir que usuários realizem conversões entre moedas utilizando dois padrões distintos de comunicação, além de acompanhar cotações e analisar o comportamento histórico das moedas por meio de gráficos e indicadores.
+O sistema tem como objetivo permitir que usuários realizem conversões entre moedas utilizando dois padrões distintos de comunicação, além de acompanhar cotações.
 
 Objetivos principais:
 - Implementar o consumo de uma API REST pública.
